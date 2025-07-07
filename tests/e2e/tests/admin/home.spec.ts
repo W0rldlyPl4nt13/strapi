@@ -118,7 +118,7 @@ test.describe('Home', () => {
     await expect(mostRecentModifiedEntry.getByRole('gridcell', { name: 'Modified' })).toBeVisible();
   });
 
-  test.only('a user should see the entries chart widget', async ({ page }) => {
+  test('a user should see the entries chart widget', async ({ page }) => {
     const chartWidget = page.getByLabel('Entries', { exact: true });
 
     await expect(chartWidget).toBeVisible();
