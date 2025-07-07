@@ -7,7 +7,7 @@ import { getLocalConfig } from '../config/local';
 
 import packageJson from '../../package.json';
 
-export const VERSION = 'v2';
+export const VERSION = 'v3';
 
 export type ProjectInfo = {
   id: string;

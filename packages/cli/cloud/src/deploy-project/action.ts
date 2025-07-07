@@ -17,6 +17,7 @@ import type {
 } from '../types';
 import { getTmpStoragePath } from '../config/local';
 import { cloudApiFactory, tokenServiceFactory, local } from '../services';
+import { VERSION } from '../services/cli-api';
 import { notificationServiceFactory } from '../services/notification';
 import { loadPkg } from '../utils/pkg';
 import { buildLogsServiceFactory } from '../services/build-logs';
@@ -348,8 +349,8 @@ export default async (ctx: CLIContext, opts: CmdOptions) => {
     ctx.logger.log(
       `🚀 Deploying project to ${chalk.cyan(project.targetEnvironment ?? `production`)} environment...`
     );
-    notificationService(`${apiConfig.apiBaseUrl}/v1/notifications`, token, cliConfig);
-    await buildLogsService(`${apiConfig.apiBaseUrl}/v2/logs/${buildId}`, token, cliConfig);
+    notificationService(`${apiConfig.apiBaseUrl}/${VERSION}/notifications`, token, cliConfig);
+    await buildLogsService(`${apiConfig.apiBaseUrl}/${VERSION}/logs/${buildId}`, token, cliConfig);
 
     ctx.logger.log(
       'Visit the following URL for deployment logs. Your deployment will be available here shortly.'

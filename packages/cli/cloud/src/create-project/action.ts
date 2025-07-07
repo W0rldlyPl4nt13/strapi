@@ -10,6 +10,7 @@ import {
   ProjectInput,
 } from '../types';
 import { cloudApiFactory, local, tokenServiceFactory } from '../services';
+import { VERSION } from '../services/cli-api';
 import { getProjectNameFromPackageJson } from './utils/get-project-name-from-pkg';
 import { promptLogin } from '../login/action';
 import {
@@ -68,7 +69,7 @@ async function createProject(
   const spinnerProject = logger.spinner('Setting up your project...').start();
   const notificationService = notificationServiceFactory(ctx);
   const { waitForEnvironmentCreation } = notificationService(
-    `${apiConfig.apiBaseUrl}/v1/notifications`,
+    `${apiConfig.apiBaseUrl}/${VERSION}/notifications`,
     token,
     config
   );
