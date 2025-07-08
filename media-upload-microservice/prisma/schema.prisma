@@ -1,0 +1,54 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model File {
+  id                String    @id @default(cuid())
+  name              String
+  alternativeText   String?
+  caption           String?
+  folder            String?
+  folderPath        String?
+  hash              String    @unique
+  ext               String
+  mime              String
+  size              Int
+  url               String?
+  previewUrl        String?
+  provider          String
+  provider_metadata String?   // JSON string
+  width             Int?
+  height            Int?
+  formats           String?   // JSON string
+  createdAt         DateTime  @default(now())
+  updatedAt         DateTime  @updatedAt
+
+  // Indexes
+  @@index([mime])
+  @@index([folder])
+  @@index([provider])
+  @@index([createdAt])
+  @@map("files")
+}
+
+model Folder {
+  id        String   @id @default(cuid())
+  name      String
+  path      String   @unique
+  parent    String?
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  // Indexes
+  @@index([parent])
+  @@index([path])
+  @@map("folders")
+}
